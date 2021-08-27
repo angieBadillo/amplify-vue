@@ -1,2 +1,2 @@
 # amplify-vue
-Testing AWS ampligy/cognito/vue
+Testing AWS amplify/cognito/vue
