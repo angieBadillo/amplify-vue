@@ -19,5 +19,11 @@
 export default {
   name: "Home",
   components: {},
+  created() {
+      onAuthUIStateChange((authState, authData) => {
+          this.authState = authState;
+          this.user = authData;
+      })
+  }
 };
 </script>

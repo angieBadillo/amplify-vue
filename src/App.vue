@@ -22,6 +22,8 @@
       </b-navbar>
     </div>
     <router-view />
+    <template>
+    </template>
   </div>
 </template>
 

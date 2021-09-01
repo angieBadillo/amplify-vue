@@ -1,0 +1,14 @@
+[
+  {
+    "groupName": "userpooltest123",
+    "precedence": 1
+  },
+  {
+    "groupName": "Cukood",
+    "precedence": 2
+  },
+  {
+    "groupName": "Angie",
+    "precedence": 3
+  }
+]

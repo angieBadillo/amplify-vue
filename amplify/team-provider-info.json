@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "ampvueb0a320c1": {}
+        "ampvueb0a320c1": {},
+        "userPoolGroups": {}
       }
     }
   }
