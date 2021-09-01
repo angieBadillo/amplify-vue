@@ -1,6 +1,12 @@
 <template>
   <b-container align="center">
     <b-card style="max-width: 40rem">
+      <!-- <template>
+        <amplify-authenticator> -->
+          <!-- The rest of your app code -->
+          <!-- <amplify-sign-out></amplify-sign-out>
+        </amplify-authenticator> -->
+      <!-- </template> -->
       <b-row class="mt-2">
         <b-col cols="6">
           <b-button
@@ -53,7 +59,7 @@
             block
             variant="primary"
             type="button"
-            @click="getCredentials()"
+            @click="getCredential()"
           >
             Get current credentials
           </b-button>
@@ -93,12 +99,7 @@
         </b-col>
       </b-row>
     </b-card>
-    <b-card
-      style="max-width: 40rem"
-      title="My Custom Login Form"
-      v-if="show"
-      class="mt-5"
-    >
+    <b-card style="max-width: 40rem" title="Login" v-if="show" class="mt-5">
       <b-form>
         <b-form-input
           id="input-1"
@@ -130,6 +131,7 @@
 </template>
 
 <script>
+import { Auth } from "aws-amplify";
 export default {
   name: "App",
   async created() {},
@@ -146,47 +148,141 @@ export default {
   },
   methods: {
     async login() {
-      console.log("In log in ...");
+      console.log(
+        "In log in ...username" +
+          this.form.username +
+          " password: " +
+          this.form.password
+      );
+      try {
+        const user = await Auth.signIn(this.form.username, this.form.password);
+        console.log("Successful login" + JSON.stringify(user, null, 2));
+        this.show = false;
+        this.form.username = "";
+        this.form.password = "";
+      } catch (error) {
+        console.log("Failure login: " + JSON.stringify(error, null, 2));
+      }
     },
     async logout() {
-      console.log("logging out ...");
+      console.log("logging out ... ");
+      try {
+        await Auth.signOut();
+        console.log("successfully logged out...");
+        this.show = true;
+      } catch (error) {
+        console.log("error singing out: ", error);
+      }
     },
-    onReset() {
+    onReset(evt) {
       console.log("onReset() ...");
+      evt.preventDefault();
+      //Reset form values
+      this.form.username = "";
+      this.form.password = "";
+      //Trick to reset/clear native browser form validation state
+      this.show = false;
+      this.$nextTick(() => {
+        this.show.true;
+      });
     },
     async getCurrentUserInfo() {
       console.log("in getCurrentUserInfo ...");
+      try {
+        let currentUser = await Auth.currentUserInfo();
+        console.log(
+          "*** Current user information: " +
+            JSON.stringify(currentUser, null, 2)
+        );
+      } catch (err) {
+        console.log(
+          "*** current user information error: " + JSON.stringify(err, null, 2)
+        );
+      }
     },
     getCurrentAuthenticatedUser() {
       console.log("in getCurrentAuthenticatedUser ...");
+      Auth.currentAuthenticatedUser()
+        .then((cognitoUser) => {
+          console.log(
+            "current user info: " + JSON.stringify(cognitoUser, null, 2)
+          );
+        })
+        .catch((err) => {
+          console.log(
+            "current user info error: " + JSON.stringify(err, null, 2)
+          );
+        });
     },
     getUserPoolUser() {
       console.log("in getUserPoolUser ...");
+      Auth.currentUserPoolUser()
+        .then((authenticatedCognitoUser) => {
+          console.log(
+            "currentUserPoolUser info: " +
+              JSON.stringify(authenticatedCognitoUser, null, 2)
+          );
+        })
+        .catch((err) => {
+          console.log("currentUserPoolUser: " + JSON.stringify(err, null, 2));
+        });
     },
-    getCredentials() {
+    getCredential() {
       console.log("in getCredentials ...");
+      Auth.currentCredentials()
+        .then((credentials) => {
+          console.log(
+            "currentUserCredentials: " + JSON.stringify(credentials, null, 2)
+          );
+        })
+        .catch((err) => {
+          console.log(
+            "currentUserCredentials error!: " + JSON.stringify(err, null, 2)
+          );
+        });
     },
     getEssentialCredentials() {
       console.log("in getEssentialCredentials ...");
+      Auth.currentCredentials().then((credentials) => {
+        let essentialCredentials = Auth.essentialCredentials(credentials);
+        console.log(
+          "essentialCredentials: " +
+            JSON.stringify(essentialCredentials, null, 2)
+        );
+      });
     },
     getCurrentSession() {
       console.log("in getCurrentSession ...");
+      Auth.currentSession()
+        .then((session) => {
+          console.log("CurrentSession: " + JSON.stringify(session, null, 2));
+        })
+        .catch((err) => {
+          console.log("CurrentSession error: " + JSON.stringify(err, null, 2));
+        });
     },
     getUserSession() {
-      console.log("in getUserSession ...");
+      Auth.currentUserPoolUser()
+        .then((user) => {
+          Auth.userSession(user)
+            .then((session) => {
+              console.log("UserSession: " + JSON.stringify(session, null, 2));
+            })
+            .catch((err) => {
+              console.log("UserSession error: " + JSON.stringify(err, null, 2)
+              );
+            });
+        })
+        .catch((err) => {
+          console.log(
+            "currentUserPoolInfoError: " + JSON.stringify(err, null, 2)
+          );
+        });
     },
     googleSignIn() {
-      console.log("in googleSignIn ...");
+      //Auth.federatedSignIn({ provider: "Google" });
+      Auth.federatedSignIn();
     },
   },
 };
 </script>
-\\
-
-let test = async function() {
-    return axios.get("/api/result").then((data) => console.log(data));
-}
-
-console.log("A");
-await test();
-console.log("B");
