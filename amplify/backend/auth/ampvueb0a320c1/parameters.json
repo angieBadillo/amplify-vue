@@ -1,6 +1,6 @@
 {
     "identityPoolName": "ampvueb0a320c1_identitypool_b0a320c1",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "ampvueb0a320c1",
     "userPoolName": "ampvueb0a320c1_userpool_b0a320c1",
     "autoVerifiedAttributes": [
