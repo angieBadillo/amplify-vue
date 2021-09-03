@@ -13,7 +13,24 @@
     },
     "categories": {
       "auth": {
-        "ampvueb0a320c1": {}
+        "ampvueb0a320c1": {},
+        "userPoolGroups": {}
+      },
+      "function": {
+        "S3Trigger7faf561d": {
+          "deploymentBucketName": "amplify-ampvue-dev-125228-deployment",
+          "s3Key": "amplify-builds/S3Trigger7faf561d-6c664c43773445474148-build.zip"
+        },
+        "S3Triggerebec23c6": {
+          "deploymentBucketName": "amplify-ampvue-dev-125228-deployment",
+          "s3Key": "amplify-builds/S3Triggerebec23c6-594c7276554f7a564856-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2pnbkqa34x5f0",
+          "type": "manual"
+        }
       }
     }
   }
