@@ -24,6 +24,10 @@
         "S3Triggerebec23c6": {
           "deploymentBucketName": "amplify-ampvue-dev-125228-deployment",
           "s3Key": "amplify-builds/S3Triggerebec23c6-594c7276554f7a564856-build.zip"
+        },
+        "rest": {
+          "deploymentBucketName": "amplify-ampvue-dev-125228-deployment",
+          "s3Key": "amplify-builds/rest-4737314d62704d513454-build.zip"
         }
       },
       "hosting": {

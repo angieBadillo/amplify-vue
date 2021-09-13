@@ -18,13 +18,21 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Storage.vue')
   },
+  // {
+  //   path: '/dataStore',
+  //   name: 'DataStore',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/DataStore.vue')
+  // },
   {
-    path: '/dataStore',
-    name: 'DataStore',
+    path: '/GraphQl',
+    name: 'GraphQl',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/DataStore.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/GraphQl.vue')
   },
   {
     path: '/authentication',

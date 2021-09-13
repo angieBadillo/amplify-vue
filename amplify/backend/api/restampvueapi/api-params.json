@@ -1,0 +1,42 @@
+{
+  "paths": [
+    {
+      "name": "/members",
+      "lambdaFunction": "rest",
+      "privacy": {
+        "private": true,
+        "auth": [
+          "/POST",
+          "/GET",
+          "/PUT",
+          "/PATCH",
+          "/DELETE"
+        ]
+      },
+      "policyResourceName": "/members"
+    }
+  ],
+  "resourceName": "restampvueapi",
+  "apiName": "restampvueapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "rest"
+    }
+  ],
+  "privacy": {
+    "auth": 1,
+    "unauth": 0,
+    "authRoleName": "amplify-ampvue-dev-125228-authRole",
+    "unAuthRoleName": "amplify-ampvue-dev-125228-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "rest",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
